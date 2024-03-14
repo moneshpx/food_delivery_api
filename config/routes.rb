@@ -8,4 +8,5 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
+    delete '/logout', to: 'users/sessions#destroy', as: :logout
 end

@@ -10,4 +10,5 @@ Rails.application.routes.draw do
     }
   delete '/logout', to: 'users/sessions#destroy', as: :logout
   post '/forgot_password', to: 'forgot_passwords#forgot_password'
+  post '/verify_code', to: 'users#verify_code'
 end

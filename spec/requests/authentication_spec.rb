@@ -5,7 +5,6 @@ RSpec.describe 'Authentication', type: :request do
   describe 'POST /signup' do
     it 'creates a new user' do
       post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', name: 'testnes' } }
-      byebug
       expect(response).to have_http_status(:ok)
     end
   end

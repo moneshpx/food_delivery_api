@@ -10,6 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.integer :verification_code
       t.text :bio
       t.string :profile_image
+      t.string :role
 
       ## Recoverable
       t.string   :reset_password_token

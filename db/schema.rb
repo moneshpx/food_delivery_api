@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_095325) do
     t.integer "verification_code"
     t.text "bio"
     t.string "profile_image"
+    t.string "role"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

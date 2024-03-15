@@ -26,7 +26,6 @@ class ForgotPasswordsController < ApplicationController
   end
 
 	def update
-		byebug
     user = User.find_by(email: params[:email], verification_code: params[:verification_code])
     if user && user.reset_password_sent_at > 2.hours.ago
       user.update(password: params[:password],password_confirmation: params[:password_confirmation], verification_code: nil, reset_password_sent_at: nil)

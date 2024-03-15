@@ -16,9 +16,6 @@ class ForgotPasswordsController < ApplicationController
     user = User.find_by_email(params[:email])
     code = params[:code]
     if user.verification_code == code.to_i
-      # Clear verification code after successful verification
-      #user.update(verification_code: nil,reset_password_sent_at: Time.now)
-      # sign_in(user) # Assuming you're using Devise for authentication
       render json: { message: "Verification successful", user: user }
     else
       render json: { error: "Invalid verification code" }, status: :unprocessable_entity
@@ -40,7 +37,6 @@ class ForgotPasswordsController < ApplicationController
 	def generate_otp
 	  otp_length = 4
 	  verification_code = SecureRandom.random_number(10**otp_length).to_s.rjust(otp_length, '0')
-
 	  return verification_code
 	end
 end

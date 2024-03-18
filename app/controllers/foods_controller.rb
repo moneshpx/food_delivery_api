@@ -2,9 +2,14 @@ class FoodsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_food, only: [:show, :update, :destroy]
 
-  def index
-    @foods = Food.all
-    render json: @foods
+  def food_list
+    if current_user.present? && current_user.role == "seller"
+      @food_lists = current_user.foods
+      render json: @food_lists
+    else
+      @food_lists = Food.all
+      render json: @food_lists
+    end
   end
 
   def show

@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   post '/verify_code', to: 'forgot_passwords#verify_code'
   put '/password_resets', to: 'forgot_passwords#update'
   post '/food_create', to: 'foods#create'
+  get '/food_list', to: 'foods#food_list'
   resources :foods
 end

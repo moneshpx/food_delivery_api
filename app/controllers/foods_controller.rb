@@ -1,6 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
-  before_action :set_food, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:create]
 
   def food_list
     if current_user.present? && current_user.role == "seller"
@@ -12,10 +11,6 @@ class FoodsController < ApplicationController
     end
   end
 
-  def show
-    render json: @food
-  end
- 
   def create
   	if current_user.role == "seller"
 	    @food = current_user.foods.build(food_params)
@@ -29,20 +24,14 @@ class FoodsController < ApplicationController
 	  end
   end
 
-  # Update and Destroy actions remain the same
-  def update
+  def food_details
+    @food = Food.find(params[:id])
+    render json: @food
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Food not found' }, status: :not_found
   end
-
-  def destroy
-  end
-
 
   private
-
-  def set_food
-    @food = Food.find(params[:id])
-  end
-
   def food_params
     params.require(:food).permit(:name, :detail, :price, :image_url, :ingredints_basic, :fruits, :user_id)
   end

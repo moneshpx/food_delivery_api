@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_093341) do
     t.string "name"
     t.text "detail"
     t.decimal "price"
+    t.string "size"
     t.string "image_url"
     t.string "ingredints_basic"
     t.string "fruits"

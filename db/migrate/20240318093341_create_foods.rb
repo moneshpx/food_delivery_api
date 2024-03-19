@@ -4,6 +4,7 @@ class CreateFoods < ActiveRecord::Migration[7.1]
       t.string :name
       t.text :detail
       t.decimal :price
+      t.string :size
       t.string :image_url
       t.string :ingredints_basic
       t.string :fruits

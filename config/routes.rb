@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   put '/password_resets', to: 'forgot_passwords#update'
   post '/food_create', to: 'foods#create'
   get '/food_list', to: 'foods#food_list'
-  get 'food_details', to: 'foods#food_details'
+  get '/food_details', to: 'foods#food_details'
   resources :foods
 end

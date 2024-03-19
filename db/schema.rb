@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_18_093341) do
     t.string "encrypted_password", default: "", null: false
     t.string "name"
     t.integer "verification_code"
+    t.integer "phone_number"
     t.text "bio"
     t.string "profile_image"
     t.string "role"

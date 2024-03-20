@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   get '/food_details', to: 'foods#food_details'
   get '/profile_info', to: 'profiles#profile_info'
   patch '/update_profile', to: 'profiles#update_profile'
-
+  post '/new_address', to: 'addresses#new_address'
+  get '/my_address', to: 'addresses#my_address'
+  patch '/update_address/:id', to: 'addresses#update_address'
 end

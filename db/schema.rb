@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_131520) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_21_080401) do
   create_table "addresses", force: :cascade do |t|
     t.string "address"
     t.string "street"
@@ -25,6 +25,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_131520) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "foods", force: :cascade do |t|
     t.string "name"
     t.text "detail"
@@ -37,6 +43,58 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_131520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.text "detail"
+    t.decimal "price"
+    t.string "size"
+    t.string "image_url"
+    t.string "ingredints_basic"
+    t.string "fruits"
+    t.integer "restaurant_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["restaurant_id"], name: "index_items_on_restaurant_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.string "address"
+    t.integer "working_days", default: 0, null: false
+    t.datetime "open_time"
+    t.datetime "close_time"
+    t.string "documents"
+    t.text "details"
+    t.string "owner_name"
+    t.string "email"
+    t.integer "mobile_number"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_restaurants_on_user_id"
+  end
+
+  create_table "restaurents", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.string "address"
+    t.integer "working_days", default: 0, null: false
+    t.datetime "open_time"
+    t.datetime "close_time"
+    t.string "documents"
+    t.text "details"
+    t.string "owner_name"
+    t.string "email"
+    t.integer "mobile_number"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_restaurents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,4 +119,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_131520) do
 
   add_foreign_key "addresses", "users"
   add_foreign_key "foods", "users"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "restaurants"
+  add_foreign_key "restaurants", "users"
+  add_foreign_key "restaurents", "users"
 end

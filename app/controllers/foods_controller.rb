@@ -36,3 +36,11 @@ class FoodsController < ApplicationController
     params.require(:food).permit(:name, :detail, :price, :image_url, :ingredints_basic, :fruits, :user_id)
   end
 end
+
+
+User<=Resturent=>item_create
+
+User<resturent
+User<Item
+
+Item assigne resturent 

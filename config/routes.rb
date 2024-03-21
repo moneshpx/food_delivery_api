@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   post '/new_address', to: 'addresses#new_address'
   get '/my_address', to: 'addresses#my_address'
   patch '/update_address/:id', to: 'addresses#update_address'
+  post '/item_create', to: 'items#item_create'
+  post '/create_restaurant', to: "restaurants#create_restaurant"
+  get '/item_list',to: "items#item_list"
+  get '/item_details', to: "items#item_details"
 end

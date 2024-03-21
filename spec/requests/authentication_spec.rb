@@ -45,8 +45,7 @@ RSpec.describe 'Authentication', type: :request do
     
     context "when user is not logged in" do
       it "returns unauthorized" do
-        delete '/logout'
-        
+        delete '/logout'       
         expect(response).to have_http_status(401) # Assuming unauthorized access returns 401 Unauthorized
       end
     end

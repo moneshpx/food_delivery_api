@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
 	has_many :items
   belongs_to :user
+  validates :owner_name, presence: true
   enum working_days: {
     monday: 0,
     tuesday: 1,

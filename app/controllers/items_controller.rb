@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     render json: @item
     rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Food not found' }, status: :not_found
+      render json: { error: 'Item not found' }, status: :not_found
   end
 
   private

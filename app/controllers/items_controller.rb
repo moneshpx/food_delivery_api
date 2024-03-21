@@ -12,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def item_list
-    @restaurant = current_user.restaurants.find(params["restaurant_id"].to_i)
+    @restaurant = current_user.restaurants.find(params[:restaurant_id])
     @items = @restaurant.items
     if @items.present?
       render json: @items

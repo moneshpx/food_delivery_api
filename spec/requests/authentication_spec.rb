@@ -2,9 +2,16 @@ require 'rails_helper'
 require 'jwt'
 
 RSpec.describe 'Authentication', type: :request do
-  describe 'POST /signup' do
-    it 'creates a new user' do
+  describe 'Usser signup' do
+    it 'create a new user' do
       post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', name: 'testnes' } }
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'Seller signup' do
+    it 'Create a new Seller' do
+      post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', restaurant_name: 'Indore thabha',owner_name: "trinsa" } }
       expect(response).to have_http_status(:ok)
     end
   end

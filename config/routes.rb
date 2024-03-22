@@ -30,11 +30,13 @@ Rails.application.routes.draw do
 
   ###########Restaurant###########
   post '/create_restaurant', to: "restaurants#create_restaurant"
+  get '/restaurant_details', to: "restaurants#restaurant_details"
  
   ###########Item routes ###########
   post '/item_create', to: 'items#item_create'
   patch '/item_update', to: 'items#item_update'
   get '/item_list',to: "items#item_list"
   get '/item_details', to: "items#item_details"
+  get '/items/search', to: 'items#search'
 
 end

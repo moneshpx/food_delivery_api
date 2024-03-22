@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, only: [:create_restaurant]
 
 	def create_restaurant
 		@restaurant = current_user.restaurants.build(restaurant_params)
@@ -8,6 +8,13 @@ class RestaurantsController < ApplicationController
     else
       render json: @restaurant.errors, status: :unprocessable_entity
     end
+	end
+
+	def restaurant_details
+		@restaurant = Restaurant.find(params[:id])
+		render json: @restaurant, status: :ok
+		rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Restaurant not found' }, status: :not_found
 	end
 
 	private

@@ -47,6 +47,19 @@ class ItemsController < ApplicationController
       render json: { error: 'Item not found' }, status: :not_found
   end
 
+  def search
+    query = params[:query]
+    if query
+      @items = Item.where("name LIKE ?", "%#{query}%")
+      if @items.present?
+        render json: @items
+      else
+        render json: {message: "Product not found"}
+      end
+    else
+      render json: { error: 'Query parameter missing' }, status: :unprocessable_entity
+    end
+  end
 
   private
 

@@ -32,7 +32,7 @@ RSpec.describe "Items", type: :request do
           }
         },
         headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      expect(response).to have_http_status(:created)
+      expect(response).to have_http_status(:ok)
     end
 
     it('Without Item name can not create the Item') do
@@ -139,7 +139,7 @@ RSpec.describe "Items", type: :request do
             category_id: category.id
           }
         },headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      expect(response).to have_http_status(:created)
+      expect(response).to have_http_status(:ok)
       get '/item_list', params: {restaurant_id: restaurant['id']
       },headers: { 'Authorization' => "Bearer #{jwt_token}" }
       item_list=JSON.parse(response.body)
@@ -185,7 +185,7 @@ RSpec.describe "Items", type: :request do
             category_id: category.id
           }
         },headers: { 'Authorization' => "Bearer #{jwt_token}" }
-      expect(response).to have_http_status(:created)
+      expect(response).to have_http_status(:ok)
       get '/item_list', params: {restaurant_id: restaurant['id']
       },headers: { 'Authorization' => "Bearer #{jwt_token}" }
       item_list=JSON.parse(response.body)

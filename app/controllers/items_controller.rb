@@ -5,9 +5,25 @@ class ItemsController < ApplicationController
     @restaurant = current_user.restaurants.find(params[:restaurant_id])
     @item = @restaurant.items.build(item_params)
     if @item.save
-      render json: @item, status: :created
+      # render json: @item, status: :created
+      render json: {
+        status: {code: 200, message: 'Item create successfully.'},
+        data: ItemSerializer.new(@item).serializable_hash[:data][:attributes]
+      }
     else
       render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def item_update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      render json: {
+        status: {code: 200, message: 'Item update successfully.'},
+        data: ItemSerializer.new(@item).serializable_hash[:data][:attributes]
+      }
+    else
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -23,10 +39,14 @@ class ItemsController < ApplicationController
 
   def item_details
     @item = Item.find(params[:id])
-    render json: @item
+    render json: {
+        status: {code: 200, message: 'Item Details.'},
+        data: ItemSerializer.new(@item).serializable_hash[:data][:attributes]
+      }
     rescue ActiveRecord::RecordNotFound
       render json: { error: 'Item not found' }, status: :not_found
   end
+
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_24_094104) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_26_085716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_094104) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "foodoffers", force: :cascade do |t|
+    t.string "title"
+    t.integer "fixed_discount"
+    t.integer "percentage_discount"
+    t.string "code"
+    t.text "detail"
+    t.date "valid_from"
+    t.date "valid_until"
+    t.bigint "restaurant_id", null: false
+    t.bigint "item_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_foodoffers_on_category_id"
+    t.index ["item_id"], name: "index_foodoffers_on_item_id"
+    t.index ["restaurant_id"], name: "index_foodoffers_on_restaurant_id"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -62,6 +80,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_094104) do
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["restaurant_id"], name: "index_items_on_restaurant_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.string "title"
+    t.integer "fixed_discount"
+    t.integer "percentage_discount"
+    t.string "code"
+    t.text "detail"
+    t.date "valid_from"
+    t.date "valid_until"
+    t.bigint "restaurant_id", null: false
+    t.bigint "item_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_offers_on_category_id"
+    t.index ["item_id"], name: "index_offers_on_item_id"
+    t.index ["restaurant_id"], name: "index_offers_on_restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -105,8 +141,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_094104) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "foodoffers", "categories"
+  add_foreign_key "foodoffers", "items"
+  add_foreign_key "foodoffers", "restaurants"
   add_foreign_key "foods", "users"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "restaurants"
+  add_foreign_key "offers", "categories"
+  add_foreign_key "offers", "items"
+  add_foreign_key "offers", "restaurants"
   add_foreign_key "restaurants", "users"
 end

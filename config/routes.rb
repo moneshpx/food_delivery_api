@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/my_address', to: 'addresses#my_address'
   patch '/update_address/:id', to: 'addresses#update_address'
 
-  ###########Restaurant###########
+  ###########Restaurant routes###########
   post '/create_restaurant', to: "restaurants#create_restaurant"
   get '/restaurant_details', to: "restaurants#restaurant_details"
  
@@ -39,4 +39,7 @@ Rails.application.routes.draw do
   get '/item_details', to: "items#item_details"
   get '/items/search', to: 'items#search'
 
+  ############Food offer routes ####
+  get '/all_offers', to: 'food_offers#all_offers'
+  post '/offer_create', to: 'food_offers#offer_create'
 end

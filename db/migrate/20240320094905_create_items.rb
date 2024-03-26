@@ -6,10 +6,8 @@ class CreateItems < ActiveRecord::Migration[7.1]
       t.decimal :price
       t.string :size
       t.string :image_url
-      t.string :ingredints_basic
-      t.string :fruits
-      t.references :restaurant, null: false, foreign_key: true
-      t.references :category, null: false, foreign_key: true
+      t.text :ingredients_basic, array: true, default: [] 
+      t.text :fruits, array: true, default: [] 
 
       t.timestamps
     end

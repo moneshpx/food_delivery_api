@@ -4,7 +4,7 @@ class CreateRestaurants < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :image
       t.string :address
-      t.integer :working_days, default: 0, null: false
+      t.string :working_days, array: true, default: [], null: false
       t.datetime :open_time
       t.datetime :close_time
       t.string :documents

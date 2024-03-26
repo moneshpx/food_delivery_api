@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_24_094104) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "addresses", force: :cascade do |t|
     t.string "address"
     t.string "street"
@@ -19,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
     t.integer "postal_code"
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
     t.string "image_url"
     t.string "ingredints_basic"
     t.string "fruits"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
@@ -51,12 +54,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
     t.decimal "price"
     t.string "size"
     t.string "image_url"
-    t.string "ingredints_basic"
-    t.string "fruits"
-    t.integer "restaurant_id", null: false
-    t.integer "category_id", null: false
+    t.text "ingredients_basic", default: [], array: true
+    t.text "fruits", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "restaurant_id", null: false
+    t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["restaurant_id"], name: "index_items_on_restaurant_id"
   end
@@ -65,7 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
     t.string "name"
     t.string "image"
     t.string "address"
-    t.integer "working_days", default: 0, null: false
+    t.string "working_days", default: [], null: false, array: true
     t.datetime "open_time"
     t.datetime "close_time"
     t.string "documents"
@@ -73,28 +76,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
     t.string "owner_name"
     t.string "email"
     t.integer "mobile_number"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_restaurants_on_user_id"
-  end
-
-  create_table "restaurents", force: :cascade do |t|
-    t.string "name"
-    t.string "image"
-    t.string "address"
-    t.integer "working_days", default: 0, null: false
-    t.datetime "open_time"
-    t.datetime "close_time"
-    t.string "documents"
-    t.text "details"
-    t.string "owner_name"
-    t.string "email"
-    t.integer "mobile_number"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_restaurents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -124,5 +109,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_061909) do
   add_foreign_key "items", "categories"
   add_foreign_key "items", "restaurants"
   add_foreign_key "restaurants", "users"
-  add_foreign_key "restaurents", "users"
 end

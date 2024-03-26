@@ -42,4 +42,5 @@ Rails.application.routes.draw do
   ############Food offer routes ####
   get '/all_offers', to: 'food_offers#all_offers'
   post '/offer_create', to: 'food_offers#offer_create'
+  get '/offer_show', to: 'food_offers#offer_show'
 end

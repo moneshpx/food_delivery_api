@@ -8,7 +8,7 @@ class FoodOffersController < ApplicationController
   end
 
   def offer_show
-    render json: @food_offer
+    render json: @offer
   end
 
   def offer_create

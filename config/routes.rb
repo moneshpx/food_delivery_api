@@ -47,4 +47,9 @@ Rails.application.routes.draw do
   ###########Categories routes #####
   get '/all_category', to: 'categories#all_category'
   get '/categories/search', to: 'categories#search'
+
+  ########### Add to cart routes ###
+  post 'add_to_cart/:item_id', to: 'carts#add_to_cart'
+  get '/cart_total_price', to: 'carts#cart_total_price'
+  get '/all_carts', to: 'carts#all_carts'
 end

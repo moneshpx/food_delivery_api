@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
       if @items.present?
         render json: @items
       else
-        render json: {message: "Product not found"}
+        render json: {message: "Item not found"}
       end
     else
       render json: { error: 'Query parameter missing' }, status: :unprocessable_entity

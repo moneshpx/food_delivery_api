@@ -16,6 +16,16 @@ class CartsController < ApplicationController
     end
   end
 
+	def delete_to_cart
+	  @cart_item = current_user.cart_items.find_by(id: params[:id])
+	  if @cart_item
+	    @cart_item.destroy
+	    render json: { message: "Cart item destroyed", item: @cart_item }, status: :ok
+	  else
+	    render json: { message: "Cart item not found" }, status: :not_found
+	  end
+	end
+
   def all_carts
   	@cart_items = current_user.cart.cart_items.includes(:item)
   

@@ -28,12 +28,13 @@ class ItemsController < ApplicationController
   end
 
   def item_list
-    @restaurant = current_user.restaurants.find(params[:restaurant_id])
-    @items = @restaurant.items
-    if @items.present?
-      render json: @items
+    @restaurant = current_user.restaurants.find_by(id: params[:restaurant_id])
+  
+    if @restaurant.nil?
+      render json: { message: "Restaurant not found" }, status: :not_found
     else
-      render json: {message: "Item not found"}
+      @items = @restaurant.items
+      render json: @items
     end
   end
 

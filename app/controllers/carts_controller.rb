@@ -16,6 +16,19 @@ class CartsController < ApplicationController
     end
   end
 
+  def update_cart_item_quantity
+    @cart_item = current_user.cart.cart_items.find(params[:cart_item_id])
+    new_quantity = params[:quantity].to_i
+
+    if new_quantity > 0
+      @cart_item.update(quantity: new_quantity)
+      render json: @cart_item, status: :ok
+    else
+      @cart_item.destroy
+      render json: { message: 'Cart item removed from cart' }, status: :ok
+    end
+  end
+
 	def delete_to_cart
 	  @cart_item = current_user.cart_items.find_by(id: params[:id])
 	  if @cart_item

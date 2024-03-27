@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   get '/cart_total_price', to: 'carts#cart_total_price'
   get '/all_carts', to: 'carts#all_carts'
   delete '/delete_to_cart/:id', to: 'carts#delete_to_cart', as: 'cart_item_destroy'
+  put '/update_cart_item_quantity/:cart_item_id', to: 'carts#update_cart_item_quantity'
 end

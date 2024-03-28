@@ -3,7 +3,7 @@ class CartsController < ApplicationController
 
   def add_to_cart
   	@item = Item.find(params[:item_id])
-    quantity = params["cartitem"]["quantity"].to_i # Convert quantity to integer
+    quantity = params["quantity"].to_i # Convert quantity to integer
     unit_price = @item.price
   	@cart_item = current_user.cart.cart_items.build(item: @item, quantity: quantity, unit_price: unit_price)
     if @cart_item.save
@@ -17,15 +17,14 @@ class CartsController < ApplicationController
   end
 
   def update_cart_item_quantity
-    @cart_item = current_user.cart.cart_items.find(params[:cart_item_id])
+    @cart_item = current_user.cart.cart_items.find(params[:id])
     new_quantity = params[:quantity].to_i
 
     if new_quantity > 0
       @cart_item.update(quantity: new_quantity)
       render json: @cart_item, status: :ok
     else
-      @cart_item.destroy
-      render json: { message: 'Cart item removed from cart' }, status: :ok
+      render json: { message: 'New quantity must be greater than 0' }, status: :unprocessable_entity
     end
   end
 

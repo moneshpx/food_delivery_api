@@ -22,10 +22,10 @@ class ForgotPasswordsController < ApplicationController
     end
   end
 
-	def update
+	def password_resets
     user = User.find_by(email: params[:email], verification_code: params[:verification_code])
     if user && user.reset_password_sent_at > 2.hours.ago
-      user.update(password: params[:password],password_confirmation: params[:password_confirmation], verification_code: nil, reset_password_sent_at: nil)
+      user.update(password: params[:new_password],password_confirmation: params[:new_password_confirmation], verification_code: nil, reset_password_sent_at: nil)
       render json: { message: "Password reset successful" }, status: :ok
     else
       render json: { error: "Invalid or expired verification code" }, status: :unprocessable_entity

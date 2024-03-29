@@ -12,8 +12,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def update_review
-	  
+  def update_review  
 	  @review = Review.find_by(id: params[:id])	  
 	  if @review.nil?
 	    render json: { message: "Review not found" }, status: :not_found

@@ -22,9 +22,10 @@ default: &default
 development:
   <<: *default
   database: food_api_development
-  username: developer
-  password: developer
+  username: pguser
+  password: pguser
   host: localhost
+  port: 5432
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -59,6 +60,10 @@ development:
 test:
   <<: *default
   database: food_api_test
+  username: pguser
+  password: pguser
+  host: localhost
+
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

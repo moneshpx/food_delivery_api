@@ -54,4 +54,10 @@ Rails.application.routes.draw do
   get '/all_carts', to: 'carts#all_carts'
   delete '/delete_to_cart', to: 'carts#delete_to_cart', as: 'cart_item_destroy'
   put '/update_cart_item_quantity', to: 'carts#update_cart_item_quantity'
+
+  ########### Review routes #########
+  post '/create_review', to: 'reviews#create_review'
+  put '/update_review', to: 'reviews#update_review'
+  get '/restaurant_reviews', to: 'reviews#restaurant_reviews'
+  get '/item_reviews', to: 'reviews#item_reviews'
 end

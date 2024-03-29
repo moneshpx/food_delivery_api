@@ -106,6 +106,55 @@ RSpec.describe "Reviews", type: :request do
       expect(response).to have_http_status(:created)
     end
 
+    it("Review update for restaurant") do
+      post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', name: 'testnes' } }
+      expect(response).to have_http_status(:ok)
+      post '/login', params: { user: { email: 'testnew@example.com', password: 'password' } }
+      expect(response).to have_http_status(:ok)
+      jwt_token = response.headers['Authorization'].split(' ').last
+      post '/create_restaurant',params: {restaurant: {name: "Food wila Indore",
+        image: "fjdkjh",
+        working_days: "monday",
+        address: "3456 arihant nagar",
+        open_time: "10AM",
+        close_time: "8PM",
+        documents: "fkjdf kdfjk f",
+        details: "This is the One of the best restaurent for reginable cost",
+        owner_name: "Jesson",
+        email: "Jesson@gmail.com",
+        mobile_number: "3456789"}}, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      restaurant =  JSON.parse(response.body)
+      restaurant_id = restaurant["id"]
+      post "/create_review", params: {  restaurant_id: restaurant_id, review: {rating: 4} }, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      expect(response).to have_http_status(:created)
+      review_id=JSON.parse(response.body)
+      put '/update_review', params:{id: review_id["id"],review:{rating: 3}}, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      res = JSON.parse(response.body)
+      expect(res["message"]).to eq("Review updated successfully")
+    end
+
+    it("Review for invalid review id") do
+      post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', name: 'testnes' } }
+      expect(response).to have_http_status(:ok)
+      post '/login', params: { user: { email: 'testnew@example.com', password: 'password' } }
+      expect(response).to have_http_status(:ok)
+      jwt_token = response.headers['Authorization'].split(' ').last
+      post '/create_restaurant',params: {restaurant: {name: "Food wila Indore",
+        image: "fjdkjh",
+        working_days: "monday",
+        address: "3456 arihant nagar",
+        open_time: "10AM",
+        close_time: "8PM",
+        documents: "fkjdf kdfjk f",
+        details: "This is the One of the best restaurent for reginable cost",
+        owner_name: "Jesson",
+        email: "Jesson@gmail.com",
+        mobile_number: "3456789"}}, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      put '/update_review', params:{id: 45 ,review:{rating: 3}}, headers: { 'Authorization' => "Bearer #{jwt_token}" }
+      res = JSON.parse(response.body)
+      expect(res["message"]).to eq("Review not found")
+    end
+
     it("Review not create with valid params") do
       post '/signup', params: { user: { email: 'testnew@example.com', password: 'password', name: 'testnes' } }
       expect(response).to have_http_status(:ok)

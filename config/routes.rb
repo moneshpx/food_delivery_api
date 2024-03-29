@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   put '/update_review', to: 'reviews#update_review'
   get '/restaurant_reviews', to: 'reviews#restaurant_reviews'
   get '/item_reviews', to: 'reviews#item_reviews'
+  get '/top_rated_restaurant', to: 'reviews#top_rated_restaurant'
 end

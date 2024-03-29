@@ -38,6 +38,16 @@ class ReviewsController < ApplicationController
 		render json: average_rating
   end
 
+  def top_rated_restaurant
+  	@top_rated_restaurants = Restaurant.joins(:reviews)
+     .select('restaurants.*, AVG(reviews.rating) AS avg_rating')
+     .group('restaurants.id')
+     .order('avg_rating DESC')
+     .limit(5)
+
+    render json: @top_rated_restaurants, status: :ok
+  end
+
   private
 
   def set_reviewable

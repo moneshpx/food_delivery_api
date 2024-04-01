@@ -61,4 +61,9 @@ Rails.application.routes.draw do
   get '/restaurant_reviews', to: 'reviews#restaurant_reviews'
   get '/item_reviews', to: 'reviews#item_reviews'
   get '/top_rated_restaurant', to: 'reviews#top_rated_restaurant'
+
+  ############## Locations routes ####
+  get '/get_locations', to: 'users#get_locations'
+
+
 end

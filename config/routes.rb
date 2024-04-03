@@ -66,5 +66,6 @@ Rails.application.routes.draw do
   post '/create_order', to: 'orders#create_order'
   get '/ongoing_order_items', to: 'orders#ongoing_order_items'
 
-
+  ############## Locations routes ####
+  get '/get_locations', to: 'users#get_locations'
 end
